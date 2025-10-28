@@ -19,7 +19,7 @@ resource "aws_iam_role" "tf_role" {
   name = "tf-role"
 
   assume_role_policy = jsonencode({
-    Version   = "2012-10-17"
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
@@ -41,7 +41,7 @@ resource "aws_iam_role" "tf_role" {
         }
       }
     ]
-  }) 
+  })
 
   tags = {
     IAC = "True"
@@ -51,18 +51,18 @@ resource "aws_iam_role" "tf_role" {
 
 resource "aws_iam_role" "app-runner-role" {
   name = "app-runner-role"
-  
+
   assume_role_policy = jsonencode({
-  	Version: "2012-10-17",
-	  Statement: [
+    Version : "2012-10-17",
+    Statement : [
       {
-        Effect: "Allow",
-        Principal: {
-          Service: "build.apprunner.amazonaws.com"
+        Effect : "Allow",
+        Principal : {
+          Service : "build.apprunner.amazonaws.com"
         },
-        Action: "sts:AssumeRole"
+        Action : "sts:AssumeRole"
       }
-	  ]
+    ]
   })
 
   managed_policy_arns = [
@@ -74,7 +74,7 @@ resource "aws_iam_role" "ecr_role" {
   name = "ecr_role"
 
   assume_role_policy = jsonencode({
-    Version   = "2012-10-17"
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
@@ -103,12 +103,12 @@ resource "aws_iam_role" "ecr_role" {
     name = "ecr-app-permission"
 
     policy = jsonencode({
-      Version   = "2012-10-17",
+      Version = "2012-10-17",
       Statement = [
         {
-          Sid = "Statement1",
-          Action = "apprunner:*",
-          Effect = "Allow",
+          Sid      = "Statement1",
+          Action   = "apprunner:*",
+          Effect   = "Allow",
           Resource = "*"
         },
         {
@@ -117,13 +117,13 @@ resource "aws_iam_role" "ecr_role" {
             "iam:PassRole",
             "iam:CreateServiceLinkedRole"
           ],
-          Effect = "Allow",
+          Effect   = "Allow",
           Resource = "*"
         },
         {
-          Sid     = "ECRPushPull",
-          Effect  = "Allow",
-          Action  = [
+          Sid    = "ECRPushPull",
+          Effect = "Allow",
+          Action = [
             "ecr:GetAuthorizationToken",
             "ecr:BatchCheckLayerAvailability",
             "ecr:CompleteLayerUpload",
@@ -160,7 +160,7 @@ resource "aws_iam_role" "ecr_role" {
 #   thumbprint_list = [
 #     "7560d6f40fa55195f740ee2b1b7c0b4836cbe103"
 #   ]  
-  
+
 #   tags = {
 #     IAC = "True"
 #   }
